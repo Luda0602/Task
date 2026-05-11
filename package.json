@@ -1,0 +1,20 @@
+{
+  "name": "lesson-12",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luda0602/Task.git"
+  },
+  "keywords": [],
+  "author": "Ludmyla Motsiuk <ludamocuk29@gmail.com>",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}
