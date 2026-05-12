@@ -24,97 +24,54 @@
   }
 
   // Виведення одного етапу
-  function showArrayStep(arrayData, markedIndex) {
+  function showArrayStep(arrayData, stepNumber) {
     document.write(`
-            <div style="
-                display:flex;
-                align-items:center;
-                margin-bottom:8px;
-                font-size:20px;
-                font-family:monospace;
-            ">
-        `);
-
-    document.write(`<span>[</span>`);
-
-    for (let i = 0; i < arrayData.length; i++) {
-      let currentStyle = `
-                width:35px;
-                height:35px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                margin:0 3px;
-                border:2px solid transparent;
-            `;
-
-      if (i === markedIndex) {
-        currentStyle = `
-                    width:35px;
-                    height:35px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    margin:0 3px;
-                    border:2px dashed red;
-                    background:#ffeaea;
-                `;
-      }
-
-      document.write(`
-                <div style="${currentStyle}">
-                    ${arrayData[i]}
-                </div>
-            `);
-
-      if (i < arrayData.length - 1) document.write(`<span>,</span>`);
-    }
-
-    document.write(`<span>]</span>`);
-    document.write(`</div>`);
-
-    document.write(`
-            <div style="
-                color:blue;
-                margin-left:40px;
-                margin-bottom:10px;
-                font-size:22px;
-            ">
-                ↓
-            </div>
-        `);
+      <p style="font-size:20px;">
+        Обмін ${stepNumber}: [${arrayData.join(", ")}]
+      </p>
+    `);
   }
 
   // Сортування бульбашкою
   function bubbleSortSteps(numbers) {
-    const copiedNumbers = [...numbers];
+    const copiedNumbers = numbers.slice();
+
+    let stepCounter = 0;
 
     document.write(`<h3>Сортування бульбашкою</h3>`);
 
     for (let outer = 0; outer < copiedNumbers.length - 1; outer++) {
       for (let inner = 0; inner < copiedNumbers.length - 1 - outer; inner++) {
         if (copiedNumbers[inner] > copiedNumbers[inner + 1]) {
-          let saveValue = copiedNumbers[inner];
+          const saveValue = copiedNumbers[inner];
 
           copiedNumbers[inner] = copiedNumbers[inner + 1];
-
           copiedNumbers[inner + 1] = saveValue;
 
-          showArrayStep(copiedNumbers, inner + 1);
+          stepCounter++;
+
+          showArrayStep(copiedNumbers, stepCounter);
         }
       }
     }
+
+    document.write(`
+      <p style="font-size:20px; color:green;">
+        <b>Відсортований масив:</b><br>
+        [${copiedNumbers.join(", ")}]
+      </p>
+    `);
   }
 
   // Початковий масив
   const startNumbers = createArray(5, 1, 50);
 
   document.write(`
-        <p style="font-size:20px;">
-            <b>Початковий масив:</b><br>
-            [${startNumbers.join(", ")}]
-        </p>
-    `);
+    <p style="font-size:20px;">
+      <b>Початковий масив:</b><br>
+      [${startNumbers.join(", ")}]
+    </p>
+  `);
 
   document.write(`<hr>`);
 

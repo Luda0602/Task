@@ -2,79 +2,80 @@
 
 // =====================================================
 // ЗАДАЧА 7
-// Двовимірний масив 4*8
-// з номерами днів.
-// Порахувати кількість неділь
-// у кожному рядку.
+// Сформувати двовимірний масив 4*8 з номерами днів.
+// Описати окремий тип для днів.
+// Заповнити випадковим чином.
+// Підрахувати для кожного рядка кількість неділь.
 // =====================================================
 
 {
-  // Номери днів тижня
-  const weekDays: string[] = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"];
+  document.write("<h1>Task 7</h1>");
 
-  // Кількість рядків і стовпців
-  const rowCount: number = 4;
+  // Окремий тип для днів тижня
+  enum Days {
+    MONDAY = 1,
+    TUESDAY = 2,
+    WEDNESDAY = 3,
+    THURSDAY = 4,
+    FRIDAY = 5,
+    SATURDAY = 6,
+    SUNDAY = 7,
+  }
 
-  const columnCount: number = 8;
+  // Випадкове число
+  function getRandomNumber(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
-  // Випадковий день
-  function randomDayName(): string {
-    const randomPosition: number = Math.floor(Math.random() * weekDays.length);
+  // Створення одного рядка
+  function createRandomRow(columnCount: number): Days[] {
+    const row: Days[] = [];
 
-    return weekDays[randomPosition];
+    for (let col = 0; col < columnCount; col++) {
+      row.push(getRandomNumber(Days.MONDAY, Days.SUNDAY) as Days);
+    }
+
+    return row;
   }
 
   // Створення двовимірного масиву
-  function createDayTable(rows: number, cols: number): string[][] {
-    const daysTable: string[][] = [];
+  function createDaysMatrix(rowCount: number, columnCount: number): Days[][] {
+    const matrix: Days[][] = [];
 
-    for (let row = 0; row < rows; row++) {
-      const currentLine: string[] = [];
-
-      for (let col = 0; col < cols; col++) {
-        currentLine.push(randomDayName());
-      }
-
-      daysTable.push(currentLine);
+    for (let row = 0; row < rowCount; row++) {
+      matrix.push(createRandomRow(columnCount));
     }
 
-    return daysTable;
+    return matrix;
   }
 
-  // Підрахунок неділь
-  function countSundays(table: string[][]): void {
+  // Підрахунок кількості неділь в одному рядку
+  function getSundayCount(row: Days[]): number {
+    let counter: number = 0;
+
+    for (let i = 0; i < row.length; i++) {
+      if (row[i] === Days.SUNDAY) {
+        counter++;
+      }
+    }
+
+    return counter;
+  }
+
+  const daysMatrix: Days[][] = createDaysMatrix(4, 8);
+
+  document.write(`<h2>Масив днів:</h2>`);
+
+  for (let row = 0; row < daysMatrix.length; row++) {
+    const sundayCount: number = getSundayCount(daysMatrix[row]);
+
     document.write(`
-      <h2>
-        Двовимірний масив днів тижня
-      </h2>
+      <p style="font-size:20px;">
+        Рядок №${row + 1}:
+        [${daysMatrix[row].join(", ")}]
+        —
+        неділь: <b>${sundayCount}</b>
+      </p>
     `);
-
-    for (let row = 0; row < table.length; row++) {
-      let sundayCounter: number = 0;
-
-      for (let col = 0; col < table[row].length; col++) {
-        if (table[row][col] === "Нд") {
-          sundayCounter++;
-        }
-      }
-
-      document.write(`
-        <p style="font-size:20px;">
-          Рядок ${row + 1}:
-          [ ${table[row].join(" , ")} ]
-          —
-          <b>
-            Неділь:
-            ${sundayCounter}
-          </b>
-        </p>
-      `);
-    }
   }
-
-  // Створення масиву
-  const resultMatrix: string[][] = createDayTable(rowCount, columnCount);
-
-  // Виведення результату
-  countSundays(resultMatrix);
 }
