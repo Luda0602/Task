@@ -2,11 +2,13 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "CommonJS",
-    "outDir": "./js",
-    "rootDir": "./src",
+    "outDir": "./lesson_13/js",
+    "rootDir": "./lesson_13/ts",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "include": ["lesson_13/ts/**/*.ts"],
+  "exclude": ["lesson_13/js", "node_modules"]
 }

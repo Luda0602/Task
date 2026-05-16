@@ -16,5 +16,10 @@
   "description": "",
   "devDependencies": {
     "typescript": "^6.0.3"
-  }
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Luda0602/Task/issues"
+  },
+  "homepage": "https://github.com/Luda0602/Task#readme"
 }
